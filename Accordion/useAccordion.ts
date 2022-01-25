@@ -7,7 +7,7 @@ export interface AccordionProps {
   allowMultiple?: boolean // if true multiple items can be expanded and hence it allows toggle, false by default
   expanded?: ExpandedIndex // if true all are expanded, false by default
   expandedIndex?: ExpandedIndex // the id or ids of AccordionItems that are currently active
-  onChange?: () => void
+  onChange?: () => void // The callback invoked when accordion items are expanded or collapsed.
 }
 
 /**
@@ -31,7 +31,15 @@ export function useAccordion(props: AccordionProps) {
     setFocusedIndex(-1)
   })
 
-  ////? Do I need a descendant context?
+  /**
+   * Hook that manages the controlled and un-controlled state
+   * for the accordion.
+   */
+
+  return {
+    focusedIndex,
+    setFocusedIndex,
+  }
 }
 
 export const AccordionContext = createContext({
@@ -45,3 +53,5 @@ export interface AccordionItemProps {
   isDisabled?: boolean // if true item is not clickable, false by default
   expanded?: boolean // if true body is expanded, false by default
 }
+
+////? Do I need a descendant context?
