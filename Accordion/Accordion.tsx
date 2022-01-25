@@ -1,5 +1,5 @@
-import { FC, useMemo } from 'react'
-import useAccordion from './useAccordion'
+import { forwardRef, useMemo } from 'react'
+import { useAccordion, AccordionContext } from './useAccordion'
 /*
  * Wraps the contents of the Accordion
  * Provides context to contents of Accordion
@@ -14,14 +14,16 @@ export type AccordionProps = {
 
 // useAccordion
 
-export const Accordion: FC<AccordionProps> = props => {
-  const ctx = useAccordion(props)
-    const context = useMemo(() => ctx, [ctx])
-    const AccordionContext = useContext()
+export const Accordion = forwardRef<AccordionProps, 'div'>(
+  ({ children, ...props }, ref) => {
+    const { ...context } = useAccordion(props)
 
-  return (
-    <AcccordionContext value={context}>
-      <div className={classNames}>{props.children}</div>
-    </AcccordionContext>
-  )
-}
+    const ctx = useMemo(() => ({ ...context }), [context])
+
+    return (
+      <AccordionContext.Provider value={ctx}>
+        {children}
+      </AccordionContext.Provider>
+    )
+  }
+)

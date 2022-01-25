@@ -1,4 +1,5 @@
-import { createContext } from 'react'
+import { createContext, useState } from 'react'
+import { useUnmountEffect } from '../hooks/useUnmountEffect'
 
 type ExpandedIndex = number | Array<number>
 
@@ -17,10 +18,23 @@ export function useAccordion(props: AccordionProps) {
   const { allowMultiple, expanded, expandedIndex, onChange } = props
   //TODO add in some logic to validate props
 
+  /**
+   * This state manages the index of the focussed accordion toggle
+   */
+  const [focusedIndex, setFocusedIndex] = useState(-1)
+
+  /**
+   * Reset focused index when accordion unmounts
+   * or descendants change
+   */
+  useUnmountEffect(() => {
+    setFocusedIndex(-1)
+  })
+
   ////? Do I need a descendant context?
 }
 
-export const [AccordionProvider, useAccordionContext] = createContext({
+export const AccordionContext = createContext({
   name: 'AccordionContext',
   errorMessage:
     'useAccordionContext: `context` is undefined. Seems you forgot to wrap the accordion components in `<Accordion />`',

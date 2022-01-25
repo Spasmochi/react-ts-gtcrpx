@@ -5,7 +5,6 @@
   "dependencies": {
     "@emotion/core": "10.x",
     "@emotion/styled": "10.x",
-    "@types/react": "^16.8.2",
     "@types/react-dom": "^16.8.0",
     "chakra-ui": "^0.3.9",
     "emotion-theming": "10.x",
@@ -19,6 +18,7 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
+    "@types/react": "^17.0.38",
     "react-scripts-ts": "latest"
   },
   "allowSyntheticDefaultImports": true,
