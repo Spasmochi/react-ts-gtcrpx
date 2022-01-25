@@ -20,5 +20,7 @@
   },
   "devDependencies": {
     "react-scripts-ts": "latest"
-  }
+  },
+  "allowSyntheticDefaultImports": true,
+  "esModuleInterop": true
 }
